@@ -28,3 +28,5 @@ class MutableStack<E>(vararg items: E) {
 
     override fun toString() = "MutableStack(${elements.joinToString()})"
 }
+
+fun String.isUpperCase() = this.all { it.isUpperCase() }
