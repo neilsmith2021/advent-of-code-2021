@@ -30,3 +30,19 @@ class MutableStack<E>(vararg items: E) {
 }
 
 fun String.isUpperCase() = this.all { it.isUpperCase() }
+
+fun <E> List<List<E>>.transpose(): List<List<E>> {
+    // Helpers
+    fun <E> List<E>.head(): E = this.first()
+    fun <E> List<E>.tail(): List<E> = this.drop(1)
+    fun <E> E.append(xs: List<E>): List<E> = listOf(this).plus(xs)
+
+    this.filter { it.isNotEmpty() }.let { ys ->
+        return when (ys.isNotEmpty()) {
+            true -> ys.map { it.head() }.append(ys.map { it.tail() }.transpose())
+            else -> emptyList()
+        }
+    }
+}
+
+fun Int.polarity() = if (this < 0) -1 else 1
